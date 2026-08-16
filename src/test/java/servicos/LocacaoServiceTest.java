@@ -124,4 +124,36 @@ public class LocacaoServiceTest {
 
         assertEquals(14.0, resultado.somaValor(filmes));
     }
+
+    @Test
+    @DisplayName("Deve aplicar desconto de 75% no quinto filme")
+    void deveAplicarDesconto75Pct() {
+
+        Filme filme3 = new Filme("filme3", 1, 4.0);
+        Filme filme4 = new Filme("filme3", 1, 4.0);
+        Filme filme5 = new Filme("filme3", 1, 4.0);
+        filmes.add(filme3);
+        filmes.add(filme4);
+        filmes.add(filme5);
+
+        Locacao resultado = service.alugarFilme(usuario, filmes);
+        assertEquals(17.0, resultado.somaValor(filmes));
+    }
+
+    @Test
+    @DisplayName("Deve aplicar desconto de 75% no quinto filme")
+    void deveAplicarDesconto100Pct() {
+
+        Filme filme3 = new Filme("filme3", 1, 4.0);
+        Filme filme4 = new Filme("filme3", 1, 4.0);
+        Filme filme5 = new Filme("filme3", 1, 4.0);
+        Filme filme6 = new Filme("filme3", 1, 4.0);
+        filmes.add(filme3);
+        filmes.add(filme4);
+        filmes.add(filme5);
+        filmes.add(filme6);
+
+        Locacao resultado = service.alugarFilme(usuario, filmes);
+        assertEquals(20.0, resultado.somaValor(filmes));
+    }
 }

@@ -66,6 +66,8 @@ public class LocacaoService {
         switch (qtdFilme){
             case 3 -> filme.setPrecoLocacao(aplicar25Pct(filme.getPrecoLocacao()));
             case 4 -> filme.setPrecoLocacao(aplicar50Pct(filme.getPrecoLocacao()));
+            case 5 -> filme.setPrecoLocacao(aplicar75Pct(filme.getPrecoLocacao()));
+            case 6 -> filme.setPrecoLocacao(aplicar100Pct(filme.getPrecoLocacao()));
         }
 
     }
@@ -75,5 +77,11 @@ public class LocacaoService {
     }
     double aplicar50Pct(double valor){
         return (1 - 0.50) * (valor);
+    }
+    double aplicar75Pct(double valor){
+        return (1 - 0.75) * (valor);
+    }
+    double aplicar100Pct(double valor){
+        return valor * 0  ;
     }
 }
