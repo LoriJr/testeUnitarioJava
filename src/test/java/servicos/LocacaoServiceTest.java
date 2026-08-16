@@ -122,7 +122,7 @@ public class LocacaoServiceTest {
         Locacao resultado = service.alugarFilme(usuario, filmes);
 
 
-        assertEquals(14.0, resultado.somaValor(filmes));
+        assertEquals(13.0, resultado.somaValor(filmes));
     }
 
     @Test
@@ -137,7 +137,7 @@ public class LocacaoServiceTest {
         filmes.add(filme5);
 
         Locacao resultado = service.alugarFilme(usuario, filmes);
-        assertEquals(17.0, resultado.somaValor(filmes));
+        assertEquals(14.0, resultado.somaValor(filmes));
     }
 
     @Test
@@ -154,6 +154,6 @@ public class LocacaoServiceTest {
         filmes.add(filme6);
 
         Locacao resultado = service.alugarFilme(usuario, filmes);
-        assertEquals(20.0, resultado.somaValor(filmes));
+        assertEquals(14.0, resultado.somaValor(filmes));
     }
 }

@@ -55,21 +55,15 @@ public class LocacaoService {
 
     void aplicarDesconto(List<Filme> listaFilmes) {
 
-        Filme filme = new Filme();
-
         for(int i =0; i < listaFilmes.size(); i++){
-            filme = listaFilmes.get(i);
+            Filme filme = listaFilmes.get(i);
+            switch (i) {
+                case 2 -> filme.setPrecoLocacao(aplicar25Pct(filme.getPrecoLocacao()));
+                case 3 -> filme.setPrecoLocacao(aplicar50Pct(filme.getPrecoLocacao()));
+                case 4 -> filme.setPrecoLocacao(aplicar75Pct(filme.getPrecoLocacao()));
+                case 5 -> filme.setPrecoLocacao(aplicar100Pct(filme.getPrecoLocacao()));
+            }
         }
-
-        int qtdFilme = listaFilmes.size();
-
-        switch (qtdFilme){
-            case 3 -> filme.setPrecoLocacao(aplicar25Pct(filme.getPrecoLocacao()));
-            case 4 -> filme.setPrecoLocacao(aplicar50Pct(filme.getPrecoLocacao()));
-            case 5 -> filme.setPrecoLocacao(aplicar75Pct(filme.getPrecoLocacao()));
-            case 6 -> filme.setPrecoLocacao(aplicar100Pct(filme.getPrecoLocacao()));
-        }
-
     }
 
     double aplicar25Pct(double valor){
