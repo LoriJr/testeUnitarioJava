@@ -33,7 +33,7 @@ public class LocacaoServiceTest {
     @BeforeEach
     void setUp(){
         usuario = new Usuario("junior");
-        filme1 = new Filme("filme1", 1, 2.5);
+        filme1 = new Filme("filme1", 1, 3.0);
         filme2 = new Filme("filme2", 2, 5.0);
 
         filmes.add(filme1);
@@ -51,7 +51,7 @@ public class LocacaoServiceTest {
 
         //verificação
         assertAll(
-                ()->assertThat(locacao.somaValor(filmes), CoreMatchers.is(CoreMatchers.equalTo(7.5))),
+                ()->assertThat(locacao.somaValor(filmes), CoreMatchers.is(CoreMatchers.equalTo(8.0))),
                 ()-> assertThat(isMesmaData(locacao.getDataLocacao(), new Date()), CoreMatchers.is(true)),
                 ()-> assertThat(isMesmaData(locacao.getDataRetorno(), obterDataComDiferencaDias(1)), CoreMatchers.is(true))
         );
@@ -107,6 +107,21 @@ public class LocacaoServiceTest {
         Locacao resultado = service.alugarFilme(usuario, filmes);
 
 
-        assertEquals(10.5, resultado.somaValor(filmes));
+        assertEquals(11.0, resultado.somaValor(filmes));
+    }
+
+    @Test
+    @DisplayName("Deve aplicar desconto de 50% no quarto filme")
+    void deveAplicarDesconto50Pct() {
+
+        Filme filme3 = new Filme("filme3", 1, 4.0);
+        Filme filme4 = new Filme("filme3", 1, 4.0);
+        filmes.add(filme3);
+        filmes.add(filme4);
+
+        Locacao resultado = service.alugarFilme(usuario, filmes);
+
+
+        assertEquals(14.0, resultado.somaValor(filmes));
     }
 }
