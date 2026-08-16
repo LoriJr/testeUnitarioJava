@@ -29,11 +29,17 @@ public class LocacaoService {
             }
         }
 
+
 		Locacao locacao = new Locacao();
 		locacao.setUsuario(usuario);
 
 		locacao.setFilmeList(filmeList);
+
+        aplicarDesconto(filmeList);
+
 		locacao.somaValor(filmeList);
+
+
 		locacao.setDataLocacao(new Date());
 
 		//Entrega no dia seguinte
@@ -46,4 +52,12 @@ public class LocacaoService {
 		
 		return locacao;
 	}
+
+    void aplicarDesconto(List<Filme> listaFilmes) {
+
+        if (listaFilmes.size() == 3) {
+            Filme filme = listaFilmes.get(2);
+            filme.setPrecoLocacao((1 - 0.25) * (filme.getPrecoLocacao()));
+        }
+    }
 }

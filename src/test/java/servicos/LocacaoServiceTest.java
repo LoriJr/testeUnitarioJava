@@ -33,8 +33,8 @@ public class LocacaoServiceTest {
     @BeforeEach
     void setUp(){
         usuario = new Usuario("junior");
-        filme1 = new Filme("star-wars", 1, 2.5);
-        filme2 = new Filme("star-treck", 2, 5.0);
+        filme1 = new Filme("filme1", 1, 2.5);
+        filme2 = new Filme("filme2", 2, 5.0);
 
         filmes.add(filme1);
         filmes.add(filme2);
@@ -95,5 +95,18 @@ public class LocacaoServiceTest {
         ExcecaoLocadora excecao = assertThrows(ExcecaoLocadora.class,
                 ()-> service.alugarFilme(usuario, filmeVazio));
         assertEquals("Filme vazio", excecao.getMessage());
+    }
+
+    @Test
+    @DisplayName("Deve aplicar desconto de 25% no terceiro filme")
+    void deveAplicarDesconto25() {
+
+        Filme filme3 = new Filme("filme3", 1, 4.0);
+        filmes.add(filme3);
+
+        Locacao resultado = service.alugarFilme(usuario, filmes);
+
+
+        assertEquals(10.5, resultado.somaValor(filmes));
     }
 }
