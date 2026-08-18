@@ -31,17 +31,14 @@ public class LocacaoService {
             }
         }
 
-
 		Locacao locacao = new Locacao();
 
 		locacao.setUsuario(usuario);
 		locacao.setFilmeList(filmeList);
 
-        aplicarDesconto(filmeList);
         locacao.setDataLocacao(new Date());
-		locacao.somaValor(filmeList);
+		locacao.calcularValorLocacao(filmeList);
 
-		//Entrega no dia seguinte
 		Date dataEntrega = new Date();
 		dataEntrega = adicionarDias(dataEntrega, 1);
 
@@ -56,30 +53,4 @@ public class LocacaoService {
 		
 		return locacao;
 	}
-
-    void aplicarDesconto(List<Filme> listaFilmes) {
-
-        for(int i =0; i < listaFilmes.size(); i++){
-            Filme filme = listaFilmes.get(i);
-            switch (i) {
-                case 2 -> filme.setPrecoLocacao(aplicar25Pct(filme.getPrecoLocacao()));
-                case 3 -> filme.setPrecoLocacao(aplicar50Pct(filme.getPrecoLocacao()));
-                case 4 -> filme.setPrecoLocacao(aplicar75Pct(filme.getPrecoLocacao()));
-                case 5 -> filme.setPrecoLocacao(aplicar100Pct(filme.getPrecoLocacao()));
-            }
-        }
-    }
-
-    double aplicar25Pct(double valor){
-        return (1 - 0.25) * (valor);
-    }
-    double aplicar50Pct(double valor){
-        return (1 - 0.50) * (valor);
-    }
-    double aplicar75Pct(double valor){
-        return (1 - 0.75) * (valor);
-    }
-    double aplicar100Pct(double valor){
-        return valor * 0  ;
-    }
 }

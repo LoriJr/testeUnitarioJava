@@ -50,7 +50,7 @@ public class LocacaoServiceTest {
 
         //verificação
         assertAll(
-                ()->assertThat(locacao.somaValor(filmes), CoreMatchers.is(CoreMatchers.equalTo(8.0))),
+                ()->assertThat(locacao.calcularValorLocacao(filmes), CoreMatchers.is(CoreMatchers.equalTo(8.0))),
                 ()-> assertThat(isMesmaData(locacao.getDataLocacao(), new Date()), CoreMatchers.is(true)),
                 ()-> assertThat(isMesmaData(locacao.getDataRetorno(), obterDataComDiferencaDias(1)), CoreMatchers.is(true))
         );
@@ -106,7 +106,7 @@ public class LocacaoServiceTest {
         Locacao resultado = service.alugarFilme(usuario, filmes);
 
 
-        assertEquals(11.0, resultado.somaValor(filmes));
+        assertEquals(11.0, resultado.calcularValorLocacao(filmes));
     }
 
     @Test
@@ -121,7 +121,7 @@ public class LocacaoServiceTest {
         Locacao resultado = service.alugarFilme(usuario, filmes);
 
 
-        assertEquals(13.0, resultado.somaValor(filmes));
+        assertEquals(13.0, resultado.calcularValorLocacao(filmes));
     }
 
     @Test
@@ -136,7 +136,7 @@ public class LocacaoServiceTest {
         filmes.add(filme5);
 
         Locacao resultado = service.alugarFilme(usuario, filmes);
-        assertEquals(14.0, resultado.somaValor(filmes));
+        assertEquals(14.0, resultado.calcularValorLocacao(filmes));
     }
 
     @Test
@@ -153,7 +153,7 @@ public class LocacaoServiceTest {
         filmes.add(filme6);
 
         Locacao resultado = service.alugarFilme(usuario, filmes);
-        assertEquals(14.0, resultado.somaValor(filmes));
+        assertEquals(14.0, resultado.calcularValorLocacao(filmes));
     }
 
     @Test
