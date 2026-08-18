@@ -6,18 +6,20 @@ import br.ce.wcaquino.entidades.Usuario;
 import br.ce.wcaquino.excecoes.ExcecaoFilmesSemEstoque;
 import br.ce.wcaquino.excecoes.ExcecaoLocadora;
 import br.ce.wcaquino.servicos.LocacaoService;
+import br.ce.wcaquino.utils.DataUtils;
 import org.hamcrest.CoreMatchers;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.util.*;
 
-import static br.ce.wcaquino.utils.DataUtils.isMesmaData;
-import static br.ce.wcaquino.utils.DataUtils.obterDataComDiferencaDias;
+import static br.ce.wcaquino.utils.DataUtils.*;
+import static java.util.Calendar.DAY_OF_WEEK;
+import static java.util.Calendar.getInstance;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -155,5 +157,16 @@ public class LocacaoServiceTest {
 
         Locacao resultado = service.alugarFilme(usuario, filmes);
         assertEquals(14.0, resultado.somaValor(filmes));
+    }
+
+    @Test
+    @DisplayName("Deve devolver na segunda ao alugar no sábado")
+    void deveDevolverNaSegundaAoAlugarNoSabado(){
+
+        Locacao locacao = service.alugarFilme(usuario, filmes);
+
+        boolean ehSegunda = DataUtils.verificarDiaSemana(locacao.getDataRetorno(), Calendar.MONDAY);
+
+        assertTrue(ehSegunda);
     }
 }
