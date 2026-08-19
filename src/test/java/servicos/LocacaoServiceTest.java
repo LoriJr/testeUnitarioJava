@@ -8,6 +8,7 @@ import br.ce.wcaquino.excecoes.ExcecaoLocadora;
 import br.ce.wcaquino.servicos.LocacaoService;
 import br.ce.wcaquino.utils.DataUtils;
 import matchers.DiaSemanaMatcher;
+import matchers.MatchersProprios;
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -17,6 +18,7 @@ import java.util.*;
 
 import static br.ce.wcaquino.utils.DataUtils.isMesmaData;
 import static br.ce.wcaquino.utils.DataUtils.obterDataComDiferencaDias;
+import static matchers.MatchersProprios.caiEm;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assume.assumeTrue;
 import static org.junit.jupiter.api.Assertions.*;
@@ -106,7 +108,7 @@ public class LocacaoServiceTest {
         boolean ehSegunda = DataUtils.verificarDiaSemana(locacao.getDataRetorno(), Calendar.MONDAY);
 
         assertTrue(ehSegunda);
-        assertThat(locacao.getDataRetorno(), new DiaSemanaMatcher(Calendar.MONDAY));
+        assertThat(locacao.getDataRetorno(), caiEm(Calendar.MONDAY));
 
     }
 
