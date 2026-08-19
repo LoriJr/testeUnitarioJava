@@ -36,10 +36,11 @@ public class LocacaoService {
 		locacao.setUsuario(usuario);
 		locacao.setFilmeList(filmeList);
 
-        locacao.setDataLocacao(new Date());
+        //TODO adicionado data para teste de locação no sábado
+        locacao.setDataLocacao(new Date(126, 7, 15));
 		locacao.calcularValorLocacao(filmeList);
 
-		Date dataEntrega = new Date();
+		Date dataEntrega = locacao.getDataLocacao();
 		dataEntrega = adicionarDias(dataEntrega, 1);
 
         if(DataUtils.verificarDiaSemana(dataEntrega, Calendar.SUNDAY)){

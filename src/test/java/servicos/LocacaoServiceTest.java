@@ -7,6 +7,7 @@ import br.ce.wcaquino.excecoes.ExcecaoFilmesSemEstoque;
 import br.ce.wcaquino.excecoes.ExcecaoLocadora;
 import br.ce.wcaquino.servicos.LocacaoService;
 import br.ce.wcaquino.utils.DataUtils;
+import matchers.DiaSemanaMatcher;
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -95,4 +96,18 @@ public class LocacaoServiceTest {
                 ()-> service.alugarFilme(usuario, filmeVazio));
         assertEquals("Filme vazio", excecao.getMessage());
     }
+
+    @Test
+    @DisplayName("Deve devolver na segunda ao alugar no sábado")
+    void deveDevolverNaSegundaAoAlugarNoSabado(){
+
+        Locacao locacao = service.alugarFilme(usuario, filmes);
+
+        boolean ehSegunda = DataUtils.verificarDiaSemana(locacao.getDataRetorno(), Calendar.MONDAY);
+
+        assertTrue(ehSegunda);
+        assertThat(locacao.getDataRetorno(), new DiaSemanaMatcher(Calendar.MONDAY));
+
+    }
+
 }
