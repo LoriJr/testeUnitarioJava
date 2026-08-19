@@ -88,7 +88,7 @@ public class LocacaoServiceTest {
 
         ExcecaoLocadora excecao = assertThrows(ExcecaoLocadora.class,
                 ()-> service.alugarFilme(usuarioVazio, filmes));
-        assertEquals("Usuário vazio", excecao.getMessage());
+        assertEquals("Usuario vazio", excecao.getMessage());
     }
 
     @Test

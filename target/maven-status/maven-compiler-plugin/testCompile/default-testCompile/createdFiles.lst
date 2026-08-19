@@ -1,0 +1,7 @@
+matchers\DiaSemanaMatcher.class
+matchers\MatchersProprios.class
+servicos\CalculadoraTest.class
+suites\SuiteExecucao.class
+servicos\CalculaValorLocacaoTest.class
+servicos\LocacaoServiceTest.class
+matchers\DataDiferencaDiasMatcher.class

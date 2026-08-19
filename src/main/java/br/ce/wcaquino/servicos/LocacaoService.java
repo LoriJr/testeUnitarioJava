@@ -22,7 +22,7 @@ public class LocacaoService {
         }
 
         if(usuario == null){
-            throw new ExcecaoLocadora("Usuário vazio");
+            throw new ExcecaoLocadora("Usuario vazio");
         }
 
         for(Filme filme : filmeList){
