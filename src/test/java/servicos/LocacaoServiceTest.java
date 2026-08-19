@@ -19,6 +19,7 @@ import java.util.*;
 import static br.ce.wcaquino.utils.DataUtils.isMesmaData;
 import static br.ce.wcaquino.utils.DataUtils.obterDataComDiferencaDias;
 import static matchers.MatchersProprios.caiEm;
+import static matchers.MatchersProprios.caiNumaSegunda;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assume.assumeTrue;
 import static org.junit.jupiter.api.Assertions.*;
@@ -108,7 +109,8 @@ public class LocacaoServiceTest {
         boolean ehSegunda = DataUtils.verificarDiaSemana(locacao.getDataRetorno(), Calendar.MONDAY);
 
         assertTrue(ehSegunda);
-        assertThat(locacao.getDataRetorno(), caiEm(Calendar.MONDAY));
+//        assertThat(locacao.getDataRetorno(), caiEm(Calendar.SUNDAY));
+        assertThat(locacao.getDataRetorno(), caiNumaSegunda());
 
     }
 
