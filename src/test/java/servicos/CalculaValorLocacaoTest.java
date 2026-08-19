@@ -32,20 +32,23 @@ public class CalculaValorLocacaoTest {
     static Filme filme4 = new Filme("Filme4", 1, 4.0);
     static Filme filme5 = new Filme("Filme5", 1, 4.0);
     static Filme filme6 = new Filme("Filme6", 1, 4.0);
+    static Filme filme7 = new Filme("Filme7", 1, 4.0);
 
     static Stream<Arguments> getParametros() {
         return Stream.of(
-                Arguments.of(Arrays.asList(filme1, filme2, filme3), 11.0),
-                Arguments.of(Arrays.asList(filme1, filme2, filme3, filme4), 13.0),
-                Arguments.of(Arrays.asList(filme1, filme2, filme3, filme4, filme5), 14.0),
-                Arguments.of(Arrays.asList(filme1, filme2, filme3, filme4, filme5, filme6), 14.0)
+                Arguments.of(Arrays.asList(filme1, filme2), 8.0, "2 Filmes: sem desconto"),
+                Arguments.of(Arrays.asList(filme1, filme2, filme3), 11.0, "3 Filmes: 25%"),
+                Arguments.of(Arrays.asList(filme1, filme2, filme3, filme4), 13.0, "4 Filmes: 50%"),
+                Arguments.of(Arrays.asList(filme1, filme2, filme3, filme4, filme5), 14.0, "5 Filmes: 75%"),
+                Arguments.of(Arrays.asList(filme1, filme2, filme3, filme4, filme5, filme6), 14.0, "6 Filmes: 100%"),
+                Arguments.of(Arrays.asList(filme1, filme2, filme3, filme4, filme5, filme6, filme7), 18.0, "7 Filmes: sem desconto")
         );
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name="{2} : {1}")
     @MethodSource("getParametros")
     @DisplayName("Deve aplicar desconto na locação de filmes")
-    void deveAplicarDescontoNaLocacaoDeFilme(List<Filme> filmes, Double valorLocacao) {
+    void deveAplicarDescontoNaLocacaoDeFilme(List<Filme> filmes, Double valorLocacao, String mensagem) {
 
         Usuario usuario = new Usuario("Usuário 1");
 
