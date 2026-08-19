@@ -17,7 +17,7 @@ import java.util.*;
 
 import static br.ce.wcaquino.utils.DataUtils.isMesmaData;
 import static br.ce.wcaquino.utils.DataUtils.obterDataComDiferencaDias;
-import static matchers.MatchersProprios.caiNumaSegunda;
+import static matchers.MatchersProprios.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -50,6 +50,11 @@ public class LocacaoServiceTest {
         Locacao locacao = service.alugarFilme(usuario, filmes);
 
         //verificação
+        //exemplo usando matcher criado
+        assertThat(locacao.getDataRetorno(), ehHojeComDiferencaDeDias(1));
+        assertThat(locacao.getDataLocacao(), ehHoje());
+
+        //exemplo bom para ser usado
         assertAll(
                 ()->assertThat(locacao.calcularValorLocacao(filmes), CoreMatchers.is(CoreMatchers.equalTo(8.0))),
                 ()-> assertThat(isMesmaData(locacao.getDataLocacao(), new Date()), CoreMatchers.is(true)),
