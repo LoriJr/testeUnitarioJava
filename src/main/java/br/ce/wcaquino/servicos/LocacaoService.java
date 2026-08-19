@@ -36,8 +36,7 @@ public class LocacaoService {
 		locacao.setUsuario(usuario);
 		locacao.setFilmeList(filmeList);
 
-        //TODO adicionado data para teste de locação no sábado
-        locacao.setDataLocacao(new Date(126, 7, 15));
+        locacao.setDataLocacao(new Date());
 		locacao.calcularValorLocacao(filmeList);
 
 		Date dataEntrega = locacao.getDataLocacao();

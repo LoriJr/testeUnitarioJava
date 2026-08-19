@@ -7,9 +7,8 @@ import br.ce.wcaquino.excecoes.ExcecaoFilmesSemEstoque;
 import br.ce.wcaquino.excecoes.ExcecaoLocadora;
 import br.ce.wcaquino.servicos.LocacaoService;
 import br.ce.wcaquino.utils.DataUtils;
-import matchers.DiaSemanaMatcher;
-import matchers.MatchersProprios;
 import org.hamcrest.CoreMatchers;
+import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,10 +17,8 @@ import java.util.*;
 
 import static br.ce.wcaquino.utils.DataUtils.isMesmaData;
 import static br.ce.wcaquino.utils.DataUtils.obterDataComDiferencaDias;
-import static matchers.MatchersProprios.caiEm;
 import static matchers.MatchersProprios.caiNumaSegunda;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assume.assumeTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LocacaoServiceTest {
@@ -104,14 +101,13 @@ public class LocacaoServiceTest {
     @DisplayName("Deve devolver na segunda ao alugar no sábado")
     void deveDevolverNaSegundaAoAlugarNoSabado(){
 
+        //adicionado para que o teste execute somente no sábado
+        //caso precise testar em outro dia, altere a data de locação no método alugarFilme
+        Assumptions.assumeTrue(DataUtils.verificarDiaSemana(new Date(), Calendar.SATURDAY));
+
         Locacao locacao = service.alugarFilme(usuario, filmes);
 
-        boolean ehSegunda = DataUtils.verificarDiaSemana(locacao.getDataRetorno(), Calendar.MONDAY);
-
-        assertTrue(ehSegunda);
-//        assertThat(locacao.getDataRetorno(), caiEm(Calendar.SUNDAY));
         assertThat(locacao.getDataRetorno(), caiNumaSegunda());
-
     }
 
 }
